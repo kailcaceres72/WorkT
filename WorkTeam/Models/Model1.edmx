@@ -8,6 +8,8 @@
   <EntityContainer Name="WorkModelStoreContainer">
     <EntitySet Name="Contactoes" EntityType="WorkModel.Store.Contactoes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Eventos" EntityType="WorkModel.Store.Eventos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Alumnoes" EntityType="WorkModel.Store.Alumnoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Materias" EntityType="WorkModel.Store.Materias" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="Contactoes">
     <Key>
@@ -26,6 +28,20 @@
     <Property Name="Fecha" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Evento" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Alumnoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Materias">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -42,6 +58,12 @@
         <EntityContainer Name="WorkEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contactoes" EntityType="Self.Contacto" />
           <EntitySet Name="Eventos" EntityType="WorkModel.Eventos" />
+          <EntitySet Name="Alumnoes" EntityType="WorkModel.Alumno" />
+          <EntitySet Name="Materias" EntityType="WorkModel.Materia" />
+          <AssociationSet Name="AlumnoMateria" Association="WorkModel.AlumnoMateria">
+            <End Role="Alumno" EntitySet="Alumnoes" />
+            <End Role="Materia" EntitySet="Materias" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Eventos">
           <Key>
@@ -51,6 +73,35 @@
           <Property Name="Fecha" Type="String" Nullable="false" />
           <Property Name="Evento" Type="String" Nullable="false" />
         </EntityType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Materias" Relationship="WorkModel.AlumnoMateria" FromRole="Alumno" ToRole="Materia" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="WorkModel.AlumnoMateria" FromRole="Materia" ToRole="Alumno" />
+          <Property Name="AlumnoId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AlumnoMateria">
+          <End Type="WorkModel.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="WorkModel.Materia" Role="Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Materia">
+              <PropertyRef Name="AlumnoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -73,6 +124,22 @@
           <ScalarProperty Name="Hora" ColumnName="Hora" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
           <ScalarProperty Name="Evento" ColumnName="Evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alumnoes">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkModel.Alumno)">
+        <MappingFragment StoreEntitySet="Alumnoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materias">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkModel.Materia)">
+        <MappingFragment StoreEntitySet="Materias">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

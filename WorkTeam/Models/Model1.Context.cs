@@ -27,5 +27,7 @@ namespace WorkTeam.Models
     
         public virtual DbSet<Contacto> Contactoes { get; set; }
         public virtual DbSet<Eventos> Eventos { get; set; }
+        public virtual DbSet<Alumno> Alumnoes { get; set; }
+        public virtual DbSet<Materia> Materias { get; set; }
     }
 }
