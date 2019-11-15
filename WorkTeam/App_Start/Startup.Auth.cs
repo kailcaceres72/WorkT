@@ -54,9 +54,9 @@ namespace WorkTeam
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1408806915960201",
+               appSecret: "db542c52ec94fafeb7177aee22c56fd0");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
