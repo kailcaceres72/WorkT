@@ -13,10 +13,10 @@ namespace WorkTeam.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WorkEntities : DbContext
+    public partial class WorkEntities5 : DbContext
     {
-        public WorkEntities()
-            : base("name=WorkEntities")
+        public WorkEntities5()
+            : base("name=WorkEntities5")
         {
         }
     
@@ -26,5 +26,6 @@ namespace WorkTeam.Models
         }
     
         public virtual DbSet<Contacto> Contactoes { get; set; }
+        public virtual DbSet<Eventos> Eventos { get; set; }
     }
 }

@@ -10,125 +10,129 @@ using WorkTeam.Models;
 
 namespace WorkTeam.Controllers
 {
-    public class EventoController : Controller
+    public class ContactoController : Controller
     {
-        private Model2Container db = new Model2Container();
+        private WorkEntities5 db = new WorkEntities5();
 
-        // GET: Evento
+        // GET: Contacto
         public ActionResult Index()
         {
-            return View(db.Eventoes.ToList());
+            return View(db.Contactoes.ToList());
         }
         [HttpPost]
         public ActionResult Index(String busqueda)
         {
-            var lista = from x in db.Eventoes
+            var lista = from x in db.Contactoes
                         select x;
 
             if (String.IsNullOrEmpty(busqueda))
             {
-                return View(db.Eventoes.ToList());
+                return View(db.Contactoes.ToList());
             }
             else
             {
-                lista = lista.Where(a => a.evento.Contains(busqueda));
+                lista = lista.Where(a => a.Nombre.Contains(busqueda));
                 return View(lista);
 
             }
 
+
+
+
+
         }
 
-        // GET: Evento/Details/5
+        // GET: Contacto/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
-            if (evento == null)
+            Contacto contacto = db.Contactoes.Find(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(evento);
+            return View(contacto);
         }
 
-        // GET: Evento/Create
+        // GET: Contacto/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Evento/Create
+        // POST: Contacto/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Fecha,evento,Hora")] Evento evento)
+        public ActionResult Create([Bind(Include = "Nombre,Celular,Email,Direccion")] Contacto contacto)
         {
             if (ModelState.IsValid)
             {
-                db.Eventoes.Add(evento);
+                db.Contactoes.Add(contacto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(evento);
+            return View(contacto);
         }
 
-        // GET: Evento/Edit/5
+        // GET: Contacto/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
-            if (evento == null)
+            Contacto contacto = db.Contactoes.Find(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(evento);
+            return View(contacto);
         }
 
-        // POST: Evento/Edit/5
+        // POST: Contacto/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Fecha,evento,Hora")] Evento evento)
+        public ActionResult Edit([Bind(Include = "Nombre,Celular,Email,Direccion")] Contacto contacto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(evento).State = EntityState.Modified;
+                db.Entry(contacto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(evento);
+            return View(contacto);
         }
 
-        // GET: Evento/Delete/5
+        // GET: Contacto/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Evento evento = db.Eventoes.Find(id);
-            if (evento == null)
+            Contacto contacto = db.Contactoes.Find(id);
+            if (contacto == null)
             {
                 return HttpNotFound();
             }
-            return View(evento);
+            return View(contacto);
         }
 
-        // POST: Evento/Delete/5
+        // POST: Contacto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Evento evento = db.Eventoes.Find(id);
-            db.Eventoes.Remove(evento);
+            Contacto contacto = db.Contactoes.Find(id);
+            db.Contactoes.Remove(contacto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

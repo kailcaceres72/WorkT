@@ -12,45 +12,49 @@ namespace WorkTeam.Controllers
 {
     public class AgendaController : Controller
     {
-        private WorkEntities db = new WorkEntities();
+        private WorkEntities5 db = new WorkEntities5();
 
         // GET: Agenda
         public ActionResult Index()
         {
-            return View(db.Contactoes.ToList());
+            return View(db.Eventos.ToList());
         }
 
         [HttpPost]
         public ActionResult Index(String busqueda)
         {
-            var lista = from x in db.Contactoes
+            var lista = from x in db.Eventos
                         select x;
 
             if (String.IsNullOrEmpty(busqueda))
             {
-                return View(db.Contactoes.ToList());
+                return View(db.Eventos.ToList());
             }
             else
             {
-                lista = lista.Where(a => a.Nombre.Contains(busqueda));
+                lista = lista.Where(a => a.Fecha.Contains(busqueda));
                 return View(lista);
 
             }
 
+
+
+
+
         }
         // GET: Agenda/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contactoes.Find(id);
-            if (contacto == null)
+            Eventos eventos = db.Eventos.Find(id);
+            if (eventos == null)
             {
                 return HttpNotFound();
             }
-            return View(contacto);
+            return View(eventos);
         }
 
         // GET: Agenda/Create
@@ -64,31 +68,31 @@ namespace WorkTeam.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Nombre,Celular,Email,Direccion")] Contacto contacto)
+        public ActionResult Create([Bind(Include = "Hora,Fecha,Evento")] Eventos eventos)
         {
             if (ModelState.IsValid)
             {
-                db.Contactoes.Add(contacto);
+                db.Eventos.Add(eventos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(contacto);
+            return View(eventos);
         }
 
         // GET: Agenda/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contactoes.Find(id);
-            if (contacto == null)
+            Eventos eventos = db.Eventos.Find(id);
+            if (eventos == null)
             {
                 return HttpNotFound();
             }
-            return View(contacto);
+            return View(eventos);
         }
 
         // POST: Agenda/Edit/5
@@ -96,39 +100,39 @@ namespace WorkTeam.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Nombre,Celular,Email,Direccion")] Contacto contacto)
+        public ActionResult Edit([Bind(Include = "Hora,Fecha,Evento")] Eventos eventos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(contacto).State = EntityState.Modified;
+                db.Entry(eventos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(contacto);
+            return View(eventos);
         }
 
         // GET: Agenda/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contacto contacto = db.Contactoes.Find(id);
-            if (contacto == null)
+            Eventos eventos = db.Eventos.Find(id);
+            if (eventos == null)
             {
                 return HttpNotFound();
             }
-            return View(contacto);
+            return View(eventos);
         }
 
         // POST: Agenda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Contacto contacto = db.Contactoes.Find(id);
-            db.Contactoes.Remove(contacto);
+            Eventos eventos = db.Eventos.Find(id);
+            db.Eventos.Remove(eventos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,59 +1,49 @@
-﻿@model IEnumerable<WorkTeam.Models.Contacto>
+﻿@model IEnumerable<WorkTeam.Models.Eventos>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Agenda de Contactos</h2>
+<h2>Agenda de Eventos</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <form method="post">
-    <input type="text" placeholder="Buscar Nombre" />
+    <input type="text" placeholder="Buscar fecha" />
     <input type="submit" value="Buscar" />
 </form>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th></th>
-        </tr>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Evento)
+        </th>
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Celular)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Direccion)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Nombre }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Nombre }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Nombre })
-                </td>
-            </tr>
-        }
-    </table>
-    <br />
-<form action="/Evento/Index" method="post">
-    <input  type="text" value="Agregar un Evento" class="btn btn-primary"/>
-</form>
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Hora)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Fecha)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Evento)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Hora }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Hora }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Hora })
+    </td>
+</tr>
+}
+
+</table>

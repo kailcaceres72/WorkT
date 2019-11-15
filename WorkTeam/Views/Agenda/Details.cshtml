@@ -1,4 +1,4 @@
-﻿@model WorkTeam.Models.Contacto
+﻿@model WorkTeam.Models.Eventos
 
 @{
     ViewBag.Title = "Details";
@@ -7,36 +7,28 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Contacto</h4>
+    <h4>Eventos</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Celular)
+            @Html.DisplayNameFor(model => model.Fecha)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Celular)
+            @Html.DisplayFor(model => model.Fecha)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Evento)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Direccion)
+            @Html.DisplayFor(model => model.Evento)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Nombre }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Hora }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
