@@ -43,7 +43,13 @@ namespace WorkTeam.Controllers
 
                             Id = row.Split(',')[0],
                             Nombre = row.Split(',')[1],
-                            Pais = row.Split(',')[2]
+                            Pais = row.Split(',')[2],
+                            Id2 = row.Split(',')[3],
+                            Nombre2 = row.Split(',')[4],
+                            Pais2 = row.Split(',')[5],
+                            Id3 = row.Split(',')[6],
+                            Nombre3 = row.Split(',')[7],
+                            Pais3 = row.Split(',')[8],
                         });
                     }
                 }
