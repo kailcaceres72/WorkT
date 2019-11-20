@@ -15,7 +15,7 @@ namespace WorkTeam.Controllers
             using (Models.WorkEntities5 db = new Models.WorkEntities5())
             {
             lst= 
-                    (from d  in db.Alumnoes
+               (from d  in db.Alumnoes
                     select new Alumno
                     { Id = d.Id,
                     Nombre = d.Nombre
