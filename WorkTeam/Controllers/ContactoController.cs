@@ -17,7 +17,7 @@ namespace WorkTeam.Controllers
         // GET: Contacto
         public ActionResult Index()
         {
-            return View(db.Contactoes.ToList());
+            return View(db.Contacto.ToList());
         }
         [HttpPost]
         public ActionResult Index(String busqueda)
