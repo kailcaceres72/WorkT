@@ -21,7 +21,7 @@ namespace WorkTeam.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("WorkEntities5", throwIfV1Schema: false)
         {
         }
 
