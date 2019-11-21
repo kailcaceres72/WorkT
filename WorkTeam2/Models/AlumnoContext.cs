@@ -10,5 +10,6 @@ namespace WorkTeam2.Models
     {
         public DbSet<Alumno> Alumno { get; set; }
 
+
     }
 }
